@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- saved from url=(0012)about:srcdoc -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Clinic</title>
+<meta name="description" content="Our Clinic">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&amp;family=Fraunces:opsz,wght@9..144,600&amp;display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f7f3ec;--ink:#23302e;--brand:#0f5e54;--brand-dark:#0a423b;--accent:#c2603f;--muted:#5e6b67;--line:#e3dccf;--card:#fffdf9}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Karla",system-ui,sans-serif;line-height:1.65;font-size:17px}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+a{color:var(--brand);text-decoration:none}
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+header{background:linear-gradient(160deg,var(--brand) 0%,var(--brand-dark) 100%);color:#f3efe7;padding:62px 0 68px}
+header h1{font-size:clamp(2.1rem,6vw,3.4rem);color:#fff;max-width:14ch}
+header .logo{max-height:64px;max-width:200px;margin-bottom:18px;display:block}
+header .tagline{margin-top:16px;font-size:1.15rem;max-width:46ch;color:#e8efed}
+header.hero-photo{background-size:cover;background-position:center}
+header.hero-split .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
+header.hero-split .hero-img{border-radius:18px;overflow:hidden;max-height:360px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+header.hero-split .hero-img img{width:100%;height:100%;max-height:360px;object-fit:cover;display:block}
+@media(max-width:720px){header.hero-split .wrap{grid-template-columns:1fr}}
+.cta-row{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:700;font-size:.98rem}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4)}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:8px}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:24px}
+.doctors{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.doctor{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.doctor .avatar{width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid var(--line);margin-bottom:14px}
+.gallery{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.gallery figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.gallery img{width:100%;height:170px;object-fit:cover;display:block}
+.gallery figcaption{padding:9px 12px;font-size:.85rem;color:var(--muted)}
+.cs-split{display:grid;gap:30px;align-items:center;grid-template-columns:1fr 1fr}
+.cs-split.right .cs-media{order:2}
+.cs-media img{width:100%;border-radius:16px;display:block;border:1px solid var(--line)}
+.cs-body .lede{margin-bottom:14px}
+.cs-top{width:100%;max-height:360px;object-fit:cover;border-radius:16px;margin-bottom:22px;border:1px solid var(--line)}
+@media(max-width:720px){.cs-split{grid-template-columns:1fr}.cs-split.right .cs-media{order:0}}
+.doctor h3{font-size:1.3rem;margin-bottom:4px}.doctor .quals{font-weight:700;color:var(--brand)}
+.doctor .spec{color:var(--muted);margin-bottom:10px}.doctor .bio{font-size:.96rem;margin-bottom:10px}
+.doctor .reg{font-size:.82rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:6px}
+ul.services{list-style:none;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+ul.services li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px 14px 38px;position:relative}
+ul.services li::before{content:"";position:absolute;left:16px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--accent)}
+table.timings{width:100%;max-width:480px;border-collapse:collapse}
+table.timings th,table.timings td{text-align:left;padding:11px 4px;border-bottom:1px solid var(--line)}
+table.timings th{font-family:"Karla",system-ui,sans-serif;font-weight:700;color:var(--brand)}
+.contact-grid{display:grid;gap:30px;grid-template-columns:1fr 1fr;align-items:start}
+.contact-grid .info p{margin-bottom:10px}
+.contact-grid iframe{width:100%;height:300px;border:0;border-radius:14px;border:1px solid var(--line)}
+.meta-pill{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.85rem;margin:4px 6px 4px 0}
+footer{background:var(--ink);color:#cdd6d3;padding:38px 0;font-size:.88rem}
+footer a{color:#9fd3c9}
+.disclaimer{margin-top:14px;color:#8d9a96;font-size:.8rem;max-width:70ch}
+.wa-float{position:fixed;right:18px;bottom:18px;background:#25d366;color:#fff;border-radius:999px;padding:14px 20px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.22);z-index:50}
+@media(max-width:720px){.contact-grid{grid-template-columns:1fr}section{padding:42px 0}}
+</style></head><body>
+<header><div class="wrap"><h1>Our Clinic</h1>
+<p class="tagline"></p>
+<div class="cta-row"><a class="btn btn-primary" href="file:///C:/Users/chaya/Downloads/clinic-website-builder_5.html#">Book on WhatsApp</a>
+<a class="btn btn-ghost" href="tel:">Call </a></div></div></header>
+<section><div class="wrap"><p class="eyebrow">About the clinic</p><h2>Care you can rely on</h2>
+<p class="lede"></p><div><span class="meta-pill">Languages:</span><span class="meta-pill">English</span></div></div></section>
+<section><div class="wrap"><p class="eyebrow">Our doctors</p><h2>Who you'll see</h2>
+<div class="doctors">
+      <article class="doctor">
+        
+        <h3></h3>
+        <p class="quals"></p>
+        <p class="spec"></p>
+        
+        
+      </article></div></div></section>
+
+<section><div class="wrap"><p class="eyebrow">Services</p><h2>What we offer</h2>
+<ul class="services"><li>General consultation</li></ul></div></section>
+<section><div class="wrap"><p class="eyebrow">OPD timings</p><h2>When we're open</h2>
+<table class="timings"><tbody><tr><th scope="row">Mon – Sat</th><td>10:00 AM – 1:00 PM, 6:00 – 9:00 PM</td></tr></tbody></table></div></section>
+<section><div class="wrap"><p class="eyebrow">Visit us</p><h2>Find &amp; reach the clinic</h2>
+<div class="contact-grid"><div class="info">
+<p><strong>Address</strong><br></p>
+<p><strong>Phone</strong><br><a href="tel:"></a></p>
+
+<p><a class="btn btn-primary" href="file:///C:/Users/chaya/Downloads/clinic-website-builder_5.html#">Message on WhatsApp</a></p></div>
+<iframe loading="lazy" title="Clinic location map" src="about:blank"></iframe></div></div></section>
+<footer><div class="wrap"><p><strong>Our Clinic</strong> · </p>
+<p></p>
+<p class="disclaimer">The information on this website is for general informational purposes only and does not constitute medical advice. Please consult a qualified doctor for diagnosis and treatment. This site does not solicit patients; it provides factual information about the clinic and its practitioners.</p>
+</div></footer>
+<a class="wa-float" href="file:///C:/Users/chaya/Downloads/clinic-website-builder_5.html#">WhatsApp us</a>
+</body></html>
