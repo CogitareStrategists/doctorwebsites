@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///C:/Users/chaya/Downloads/clinic-website-builder_5.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clinic Website Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Clinic Website Builder Save_files/css2" rel="stylesheet">
+<style>
+  :root{--bg:#eef0ee;--panel:#fbfaf7;--ink:#222c2a;--brand:#0f5e54;--accent:#c2603f;--muted:#667; --line:#dfe2dd;--warn-bg:#fdf2ec;--warn-bd:#e7b59a;--warn-ink:#8a3d1c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Karla",system-ui,sans-serif;font-size:15px;line-height:1.5}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:1.5rem}
+  .topbar{background:var(--brand);color:#fff;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .topbar-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .topbar h1{color:#fff}
+  .topbar p{font-size:.85rem;color:#cfe6e0}
+  .layout{display:grid;grid-template-columns:minmax(360px,1fr) minmax(380px,1.1fr);gap:0;height:calc(100vh - 58px)}
+  @media(max-width:900px){.layout{grid-template-columns:1fr;height:auto}}
+  .form-col{overflow-y:auto;padding:22px;background:var(--panel)}
+  .preview-col{background:#d9ddd8;padding:18px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+  fieldset{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:18px;background:#fff}
+  legend{font-family:"Fraunces",serif;font-weight:600;padding:0 8px;font-size:1.05rem}
+  label{display:block;font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:10px 0 4px}
+  input,textarea,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+  textarea{resize:vertical;min-height:60px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .row>*{flex:1;min-width:120px}
+  .item{border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;background:#fafafa;position:relative}
+  .btn{border:0;border-radius:999px;padding:9px 16px;font:inherit;font-weight:700;cursor:pointer}
+  .btn-add{background:#e7efed;color:var(--brand);border:1px dashed var(--brand);margin-top:10px}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-ghost{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.4)}
+  .btn-remove{position:absolute;top:8px;right:8px;background:none;border:0;color:#b44;cursor:pointer;font-weight:700;font-size:.8rem}
+  .preview-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .preview-head strong{font-family:"Fraunces",serif}
+  iframe.preview{flex:1;width:100%;border:1px solid #c4c9c3;border-radius:12px;background:#fff;min-height:420px}
+  .warnings{background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn-ink);border-radius:10px;padding:12px 14px;font-size:.85rem;max-height:160px;overflow:auto}
+  .warnings.ok{background:#eef6ee;border-color:#bcd9bc;color:#2f6b3a}
+  .warnings ul{margin:6px 0 0 18px}
+  .hint{font-size:.78rem;color:var(--muted);margin-top:4px}
+  .uprow{display:flex;align-items:center;gap:12px}
+  .uprow input[type=file]{flex:1}
+  .thumb{height:46px;width:46px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+  .thumb.logo{width:auto;max-width:120px;object-fit:contain;background:#fff}
+  .fac-item{display:flex;gap:10px;align-items:center;margin-top:8px}
+  .fac-item img{height:46px;width:60px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+  .fac-item input{flex:1}
+  .ord-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;margin-top:8px;background:#fff;font-weight:700}
+  .ord-item.custom{display:block}
+  .ord-item.off{opacity:.5}
+  .ord-item.custom input,.ord-item.custom textarea{font-weight:400;margin-top:8px}
+  .ord-item.custom textarea{min-height:64px}
+  .ord-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .ord-ctl{display:flex;align-items:center;gap:8px}
+  .ord-toggle{font-weight:400;font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:4px;text-transform:none;letter-spacing:0;margin:0}
+  .ord-toggle input{width:auto}
+  .ord-btns button{border:1px solid var(--line);background:#f4f6f4;border-radius:6px;width:30px;height:30px;font-size:1rem;cursor:pointer;margin-left:4px}
+  .ord-btns button:disabled{opacity:.3;cursor:default}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div><h1>Clinic Website Builder</h1>
+  <p>Fill in the clinic's details · preview updates live · download a ready-to-host site</p></div>
+  <div class="topbar-actions">
+    <button class="btn btn-ghost" onclick="document.getElementById(&#39;draft_file&#39;).click()">Load draft</button>
+    <input type="file" id="draft_file" accept="application/json,.json" style="display:none" onchange="loadDraft(this.files[0])">
+    <button class="btn btn-ghost" onclick="saveDraft()">Save draft</button>
+    <button class="btn btn-ghost" onclick="downloadSite()">Download index.html ↓</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="form-col">
+    <fieldset>
+      <legend>Page layout</legend>
+      <label>Structure preset</label>
+      <select id="preset" onchange="applyPreset(this.value)">
+        <option value="full">Full — all sections</option>
+        <option value="essentials">Essentials — about, doctors, timings, contact</option>
+        <option value="doctorled">Doctor-led — doctors first</option>
+        <option value="minimal">Minimal — about + contact only</option>
+      </select>
+      <div class="hint" style="margin:8px 0 12px">A starting point you can fine-tune below: reorder with ↑↓, untick to hide a section, or add your own. Header and footer are fixed; "Clinic photos" shows only if photos are added.</div>
+      <div id="order"><div class="ord-item">
+        <span class="ord-name">1. About the clinic</span>
+        <span class="ord-ctl"><label class="ord-toggle"><input type="checkbox" checked="" onchange="toggleSection(0,this.checked)"> show</label><span class="ord-btns">
+        <button onclick="moveSection(0,-1)" disabled="" title="Move up">↑</button>
+        <button onclick="moveSection(0,1)" title="Move down">↓</button>
+      </span></span></div><div class="ord-item">
+        <span class="ord-name">2. Doctors</span>
+        <span class="ord-ctl"><label class="ord-toggle"><input type="checkbox" checked="" onchange="toggleSection(1,this.checked)"> show</label><span class="ord-btns">
+        <button onclick="moveSection(1,-1)" title="Move up">↑</button>
+        <button onclick="moveSection(1,1)" title="Move down">↓</button>
+      </span></span></div><div class="ord-item">
+        <span class="ord-name">3. Clinic photos</span>
+        <span class="ord-ctl"><label class="ord-toggle"><input type="checkbox" checked="" onchange="toggleSection(2,this.checked)"> show</label><span class="ord-btns">
+        <button onclick="moveSection(2,-1)" title="Move up">↑</button>
+        <button onclick="moveSection(2,1)" title="Move down">↓</button>
+      </span></span></div><div class="ord-item">
+        <span class="ord-name">4. Services</span>
+        <span class="ord-ctl"><label class="ord-toggle"><input type="checkbox" checked="" onchange="toggleSection(3,this.checked)"> show</label><span class="ord-btns">
+        <button onclick="moveSection(3,-1)" title="Move up">↑</button>
+        <button onclick="moveSection(3,1)" title="Move down">↓</button>
+      </span></span></div><div class="ord-item">
+        <span class="ord-name">5. OPD timings</span>
+        <span class="ord-ctl"><label class="ord-toggle"><input type="checkbox" checked="" onchange="toggleSection(4,this.checked)"> show</label><span class="ord-btns">
+        <button onclick="moveSection(4,-1)" title="Move up">↑</button>
+        <button onclick="moveSection(4,1)" title="Move down">↓</button>
+      </span></span></div><div class="ord-item">
+        <span class="ord-name">6. Visit / contact</span>
+        <span class="ord-ctl"><label class="ord-toggle"><input type="checkbox" checked="" onchange="toggleSection(5,this.checked)"> show</label><span class="ord-btns">
+        <button onclick="moveSection(5,-1)" title="Move up">↑</button>
+        <button onclick="moveSection(5,1)" disabled="" title="Move down">↓</button>
+      </span></span></div></div>
+      <button class="btn btn-add" onclick="addCustomSection()">+ Add custom section</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Clinic</legend>
+      <label>Clinic name *</label><input id="clinic_name" oninput="update()" placeholder="Sunrise Family Clinic">
+      <label>Tagline</label><input id="tagline" oninput="update()" placeholder="Everyday family healthcare in Kondapur, Hyderabad.">
+      <div class="hint">Keep it factual — no "best", "top", or "guaranteed".</div>
+      <label>About (2–3 sentences)</label><textarea id="about" oninput="update()" placeholder="What the clinic does, in plain factual terms."></textarea>
+      <label>Design theme</label>
+      <select id="theme" onchange="update()">
+        <option value="teal">Teal &amp; cream — warm, classic</option>
+        <option value="slate">Slate &amp; sand — cool, professional</option>
+        <option value="rose">Plum &amp; sage — soft, distinctive</option>
+        <option value="forest">Forest &amp; linen — earthy, grounded</option>
+        <option value="ocean">Ocean &amp; mist — clean, clinical</option>
+        <option value="berry">Berry &amp; cream — elegant, editorial</option>
+        <option value="saffron">Saffron &amp; charcoal — warm, modern</option>
+        <option value="sage">Sage &amp; stone — calm, spa-like</option>
+        <option value="clay">Clay &amp; ivory — friendly, hand-made</option>
+        <option value="indigo">Indigo &amp; pearl — refined, trustworthy</option>
+      </select>
+      <label>Clinic logo</label>
+      <div class="uprow">
+        <input type="file" accept="image/*" onchange="setLogo(this.files[0])">
+        <div id="logo_thumb"></div>
+      </div>
+      <div class="hint">Optional. Shown in the header. A transparent PNG works best.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Hero banner</legend>
+      <label>Hero style</label>
+      <select id="hero_style" onchange="update()">
+        <option value="gradient">Colour gradient (no photo)</option>
+        <option value="photo">Photo background</option>
+        <option value="side">Photo beside text</option>
+      </select>
+      <label>Hero / cover photo</label>
+      <div class="uprow">
+        <input type="file" accept="image/*" onchange="setHeroImage(this.files[0])">
+        <div id="hero_thumb"></div>
+      </div>
+      <div class="hint">Used by the "photo" and "beside text" styles — a wide clinic exterior, interior, or doctor photo works best. Falls back to the colour gradient if no photo is added. This is the easiest way to make each clinic's site look distinct.</div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Doctors</legend>
+      <div id="doctors">
+    <div class="item">
+      
+      <label>Name</label><input value="" oninput="doctors[0].name=this.value;update()" placeholder="Dr. Anjali Rao">
+      <div class="row">
+        <div><label>Qualifications</label><input value="" oninput="doctors[0].qualifications=this.value;update()" placeholder="MBBS, MD (Medicine)"></div>
+        <div><label>Specialization</label><input value="" oninput="doctors[0].specialization=this.value;update()" placeholder="General Physician"></div>
+      </div>
+      <label>Registration number</label><input value="" oninput="doctors[0].registration_no=this.value;update()" placeholder="TSMC/FMR/12345">
+      <label>One-line bio (factual)</label><input value="" oninput="doctors[0].bio=this.value;update()" placeholder="Family medicine, focus on diabetes &amp; BP care.">
+      <label>Photo</label>
+      <div class="uprow">
+        <input type="file" accept="image/*" onchange="setDoctorPhoto(0, this.files[0])">
+        
+      </div>
+    </div></div>
+      <button class="btn btn-add" onclick="addDoctor()">+ Add doctor</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Services</legend>
+      <div id="services">
+    <div class="row" style="margin-top:8px">
+      <input value="General consultation" oninput="services[0]=this.value;update()" placeholder="e.g. Diabetes management">
+      <button class="btn-remove" style="position:static;flex:0" onclick="removeService(0)">✕</button>
+    </div></div>
+      <button class="btn btn-add" onclick="addService()">+ Add service</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>OPD timings</legend>
+      <div id="timings">
+    <div class="item">
+      
+      <div class="row">
+        <div><label>Days</label><input value="Mon – Sat" oninput="timings[0].days=this.value;update()" placeholder="Mon – Sat"></div>
+        <div><label>Hours</label><input value="10:00 AM – 1:00 PM, 6:00 – 9:00 PM" oninput="timings[0].hours=this.value;update()" placeholder="10 AM – 1 PM, 6 – 9 PM"></div>
+      </div>
+    </div></div>
+      <button class="btn btn-add" onclick="addTiming()">+ Add timing row</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Contact &amp; location</legend>
+      <label>Full address *</label><textarea id="address" oninput="update()" placeholder="Plot 14, Kothaguda X Roads, Kondapur, Hyderabad 500084"></textarea>
+      <div class="row">
+        <div><label>Phone *</label><input id="phone" oninput="update()" placeholder="+91 98765 43210"></div>
+        <div><label>WhatsApp (if different)</label><input id="whatsapp" oninput="update()" placeholder="+91 98765 43210"></div>
+      </div>
+      <div class="row">
+        <div><label>Email</label><input id="email" oninput="update()" placeholder="clinic@example.com"></div>
+        <div><label>Consultation fee</label><input id="fees" oninput="update()" placeholder="₹500"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Languages</legend>
+      <div id="languages">
+    <div class="row" style="margin-top:8px">
+      <input value="English" oninput="languages[0]=this.value;update()" placeholder="e.g. Telugu">
+      <button class="btn-remove" style="position:static;flex:0" onclick="removeLanguage(0)">✕</button>
+    </div></div>
+      <button class="btn btn-add" onclick="addLanguage()">+ Add language</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Clinic photos</legend>
+      <div class="hint" style="margin-bottom:8px">Photos of the clinic, rooms, or facilities. Shown as a gallery. Add a short caption for each.</div>
+      <div id="facilities"></div>
+      <label>Add photos</label>
+      <input type="file" accept="image/*" multiple="" onchange="addFacilities(this.files)">
+    </fieldset>
+  </div>
+
+  <div class="preview-col">
+    <div class="preview-head">
+      <strong>Live preview</strong>
+      <button class="btn btn-primary" onclick="downloadSite()">Download index.html ↓</button>
+    </div>
+    <div id="warnings" class="warnings"><strong>Review before publishing:</strong><ul><li>Add a medical registration number for the primary doctor before publishing — it's expected on a practitioner's public page in India.</li></ul></div>
+    <iframe id="preview" class="preview" title="Website preview" src="./Clinic Website Builder Save_files/saved_resource.html"></iframe>
+  </div>
+</div>
+
+<script>
+/* ---------- state ---------- */
+let doctors  = [{name:"",qualifications:"",specialization:"",registration_no:"",bio:"",photo:""}];
+let services = ["General consultation"];
+let timings  = [{days:"Mon – Sat", hours:"10:00 AM – 1:00 PM, 6:00 – 9:00 PM"}];
+let languages= ["English"];
+let logo     = "";
+let heroImage = "";
+let facilities = [];   /* [{src, caption}] */
+const BUILTIN_LABELS = {about:"About the clinic", doctors:"Doctors", gallery:"Clinic photos", services:"Services", timings:"OPD timings", contact:"Visit / contact"};
+let customSeq = 0;
+let layout = [
+  {key:"about",   kind:"builtin", enabled:true},
+  {key:"doctors", kind:"builtin", enabled:true},
+  {key:"gallery", kind:"builtin", enabled:true},
+  {key:"services",kind:"builtin", enabled:true},
+  {key:"timings", kind:"builtin", enabled:true},
+  {key:"contact", kind:"builtin", enabled:true}
+];
+const PRESETS = {
+  full:      {order:["about","doctors","gallery","services","timings","contact"], on:["about","doctors","gallery","services","timings","contact"]},
+  essentials:{order:["about","doctors","timings","contact","gallery","services"], on:["about","doctors","timings","contact"]},
+  doctorled: {order:["doctors","about","services","gallery","timings","contact"], on:["doctors","about","services","timings","contact"]},
+  minimal:   {order:["about","contact","doctors","gallery","services","timings"], on:["about","contact"]}
+};
+
+/* ---------- image downscaling (keeps the output file small) ---------- */
+function loadImage(file, maxW, cb){
+  if(!file){cb("");return;}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const scale=Math.min(1, maxW/img.width);
+      const w=Math.round(img.width*scale), h=Math.round(img.height*scale);
+      const canvas=document.createElement("canvas");
+      canvas.width=w;canvas.height=h;
+      canvas.getContext("2d").drawImage(img,0,0,w,h);
+      /* PNG (logo) keeps transparency; photos go to JPEG for size */
+      const isPng=/\.png$/i.test(file.name);
+      cb(canvas.toDataURL(isPng?"image/png":"image/jpeg", 0.82));
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function setLogo(file){
+  loadImage(file, 400, dataUrl=>{
+    logo=dataUrl;
+    document.getElementById("logo_thumb").innerHTML = logo?`<img class="thumb logo" src="${logo}">`:"";
+    update();
+  });
+}
+function setHeroImage(file){
+  loadImage(file, 1600, dataUrl=>{
+    heroImage=dataUrl;
+    document.getElementById("hero_thumb").innerHTML = heroImage?`<img class="thumb" src="${heroImage}">`:"";
+    update();
+  });
+}
+function setCustomImage(i, file){
+  loadImage(file, 1000, dataUrl=>{ layout[i].image=dataUrl; renderLayout(); update(); });
+}
+function clearCustomImage(i){ layout[i].image=""; renderLayout(); update(); }
+function setDoctorPhoto(i, file){
+  loadImage(file, 600, dataUrl=>{ doctors[i].photo=dataUrl; renderDoctors(); update(); });
+}
+function addFacilities(files){
+  Array.from(files).forEach(f=>{
+    loadImage(f, 1200, dataUrl=>{ facilities.push({src:dataUrl, caption:""}); renderFacilities(); update(); });
+  });
+}
+function removeFacility(i){facilities.splice(i,1);renderFacilities();update();}
+
+function moveSection(i,dir){
+  const j=i+dir; if(j<0||j>=layout.length) return;
+  [layout[i],layout[j]]=[layout[j],layout[i]];
+  renderLayout(); update();
+}
+function toggleSection(i,on){ layout[i].enabled=on; renderLayout(); update(); }
+function addCustomSection(){
+  layout.push({key:"custom_"+(++customSeq), kind:"custom", enabled:true, eyebrow:"", title:"", body:""});
+  renderLayout(); update();
+}
+function removeSection(i){ layout.splice(i,1); renderLayout(); update(); }
+function applyPreset(name){
+  const pre=PRESETS[name]; if(!pre) return;
+  const customs=layout.filter(s=>s.kind==="custom");
+  const builtins=pre.order.map(k=>({key:k, kind:"builtin", enabled:pre.on.includes(k)}));
+  layout=builtins.concat(customs);
+  renderLayout(); update();
+}
+function renderLayout(){
+  document.getElementById("order").innerHTML=layout.map((s,i)=>{
+    const arrows=`<span class="ord-btns">
+        <button onclick="moveSection(${i},-1)" ${i===0?"disabled":""} title="Move up">↑</button>
+        <button onclick="moveSection(${i},1)" ${i===layout.length-1?"disabled":""} title="Move down">↓</button>
+      </span>`;
+    const toggle=`<label class="ord-toggle"><input type="checkbox" ${s.enabled?"checked":""} onchange="toggleSection(${i},this.checked)"> show</label>`;
+    if(s.kind==="builtin"){
+      return `<div class="ord-item${s.enabled?"":" off"}">
+        <span class="ord-name">${i+1}. ${BUILTIN_LABELS[s.key]}</span>
+        <span class="ord-ctl">${toggle}${arrows}</span></div>`;
+    }
+    return `<div class="ord-item custom${s.enabled?"":" off"}">
+      <div class="ord-row"><span class="ord-name">${i+1}. Custom section</span>
+        <span class="ord-ctl">${toggle}${arrows}
+        <button class="btn-remove" style="position:static" onclick="removeSection(${i})" title="Delete">✕</button></span></div>
+      <input value="${esc(s.eyebrow)}" oninput="layout[${i}].eyebrow=this.value;update()" placeholder="Small label (optional), e.g. Good to know">
+      <input value="${esc(s.title)}" oninput="layout[${i}].title=this.value;update()" placeholder="Heading, e.g. Insurance & payments">
+      <textarea oninput="layout[${i}].body=this.value;update()" placeholder="Section text. Leave a blank line between paragraphs.">${esc(s.body)}</textarea>
+      <div class="uprow">
+        <input type="file" accept="image/*" onchange="setCustomImage(${i}, this.files[0])">
+        ${s.image?`<img class="thumb" src="${s.image}"><button class="btn-remove" style="position:static" onclick="clearCustomImage(${i})" title="Remove image">✕</button>`:""}
+      </div>
+      ${s.image?`<select onchange="layout[${i}].imagePos=this.value;update()">
+        <option value="right" ${(!s.imagePos||s.imagePos==="right")?"selected":""}>Image on the right</option>
+        <option value="left" ${s.imagePos==="left"?"selected":""}>Image on the left</option>
+        <option value="top" ${s.imagePos==="top"?"selected":""}>Image on top</option>
+      </select>`:""}
+    </div>`;
+  }).join("");
+}
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function digits(s){return String(s||"").replace(/\D/g,"");}
+
+/* ---------- themes ---------- */
+const THEMES = {
+  teal:    {paper:"#f7f3ec",ink:"#23302e",brand:"#0f5e54",brandDark:"#0a423b",accent:"#c2603f",muted:"#5e6b67",line:"#e3dccf",card:"#fffdf9",head:"Fraunces",headStack:'"Fraunces",Georgia,serif',body:"Karla",bodyStack:'"Karla",system-ui,sans-serif'},
+  slate:   {paper:"#f4f5f7",ink:"#1f2733",brand:"#274060",brandDark:"#16283f",accent:"#c08457",muted:"#5a6573",line:"#dde1e8",card:"#ffffff",head:"Spectral",headStack:'"Spectral",Georgia,serif',body:"Public Sans",bodyStack:'"Public Sans",system-ui,sans-serif'},
+  rose:    {paper:"#fbf4f3",ink:"#33232a",brand:"#7a3b5e",brandDark:"#5a2745",accent:"#3f7d6e",muted:"#6b5560",line:"#ecdcdf",card:"#fffafa",head:"Lora",headStack:'"Lora",Georgia,serif',body:"Mulish",bodyStack:'"Mulish",system-ui,sans-serif'},
+  forest:  {paper:"#f4f1ea",ink:"#1f2a23",brand:"#2f5d3a",brandDark:"#1e3d27",accent:"#cf7d3c",muted:"#5a665c",line:"#e1dccd",card:"#fffef9",head:"Bitter",headStack:'"Bitter",Georgia,serif',body:"Work Sans",bodyStack:'"Work Sans",system-ui,sans-serif'},
+  ocean:   {paper:"#f1f4f7",ink:"#1b2a36",brand:"#1f6f8b",brandDark:"#144e63",accent:"#e08a4b",muted:"#54636e",line:"#d8e0e6",card:"#ffffff",head:"Newsreader",headStack:'"Newsreader",Georgia,serif',body:"Hanken Grotesk",bodyStack:'"Hanken Grotesk",system-ui,sans-serif'},
+  berry:   {paper:"#f8f3f0",ink:"#2c2330",brand:"#6d3a73",brandDark:"#4f2655",accent:"#d98a4f",muted:"#685a6b",line:"#e8dde2",card:"#fffcfb",head:"Playfair Display",headStack:'"Playfair Display",Georgia,serif',body:"Figtree",bodyStack:'"Figtree",system-ui,sans-serif'},
+  saffron: {paper:"#fbf6ee",ink:"#2b2620",brand:"#b5612a",brandDark:"#8a4619",accent:"#2f7d6e",muted:"#6b6155",line:"#ece2d2",card:"#fffdf8",head:"Bricolage Grotesque",headStack:'"Bricolage Grotesque",system-ui,sans-serif',body:"Asap",bodyStack:'"Asap",system-ui,sans-serif'},
+  sage:    {paper:"#f2f4f0",ink:"#2a3029",brand:"#5b7355",brandDark:"#3f5239",accent:"#b9763f",muted:"#5f6a5c",line:"#e0e3da",card:"#ffffff",head:"Cormorant Garamond",headStack:'"Cormorant Garamond",Georgia,serif',body:"DM Sans",bodyStack:'"DM Sans",system-ui,sans-serif'},
+  clay:    {paper:"#f9f3ec",ink:"#2f2622",brand:"#a8542f",brandDark:"#7d3c1f",accent:"#4a7c6f",muted:"#6e6157",line:"#ece0d2",card:"#fffdf9",head:"Zilla Slab",headStack:'"Zilla Slab",Georgia,serif',body:"Libre Franklin",bodyStack:'"Libre Franklin",system-ui,sans-serif'},
+  indigo:  {paper:"#f3f3f8",ink:"#21243a",brand:"#3a3f7d",brandDark:"#272b59",accent:"#d08a52",muted:"#565a73",line:"#dcdce6",card:"#ffffff",head:"Source Serif 4",headStack:'"Source Serif 4",Georgia,serif',body:"Manrope",bodyStack:'"Manrope",system-ui,sans-serif'}
+};
+
+/* ---------- compliance (ported from guardrails.py) ---------- */
+const SUPERLATIVES=["best","#1","no.1","no. 1","number one","number 1","top ","topmost","world-class","world class","world's best","leading","most trusted","most experienced","renowned","famous","finest","unmatched","unparalleled"];
+const GUARANTEES=["guaranteed","guarantee","100% cure","100 percent","permanent cure","complete cure","fully cured","no side effects","side-effect free","risk-free","instant cure","miracle","magic cure","sure shot","assured results","definite results"];
+const FABRICATION=["5 star","5-star","rated #","thousands of happy patients","lakhs of patients","98% success","99% success","success rate of"];
+function checkCompliance(text){
+  const t=(text||"").toLowerCase(), issues=[];
+  SUPERLATIVES.forEach(w=>{if(t.includes(w))issues.push('Avoid the superlative "'+w.trim()+'" — doctors in India may not advertise superiority. Use neutral wording.');});
+  GUARANTEES.forEach(w=>{if(t.includes(w))issues.push('Remove the outcome claim "'+w+'" — promising medical results is not allowed.');});
+  FABRICATION.forEach(w=>{if(t.includes(w))issues.push('Remove "'+w+'" — no fabricated ratings, success rates, or patient counts.');});
+  return [...new Set(issues)];
+}
+
+/* ---------- collect ---------- */
+function val(id){return document.getElementById(id).value.trim();}
+function collectProfile(){
+  return {
+    clinic_name: val("clinic_name")||"Our Clinic",
+    tagline: val("tagline"),
+    about: val("about"),
+    theme: val("theme"),
+    doctors: doctors,
+    services: services.filter(s=>s.trim()),
+    timings: timings.filter(t=>t.days||t.hours),
+    address: val("address"),
+    phone: val("phone"),
+    whatsapp: val("whatsapp"),
+    email: val("email"),
+    fees: val("fees"),
+    languages: languages.filter(l=>l.trim()),
+    logo: logo,
+    heroStyle: val("hero_style"),
+    heroImage: heroImage,
+    facilities: facilities.filter(f=>f.src),
+    sectionOrder: layout
+  };
+}
+
+/* ---------- site builder (mirrors clinic_template.py) ---------- */
+function customSectionHtml(s){
+  const paras = String(s.body||"").trim().split(/\n{2,}/).map(t=>t.trim()).filter(Boolean)
+    .map(t=>`<p class="lede" style="max-width:70ch">${esc(t).replace(/\n/g,"<br>")}</p>`).join("");
+  if(!s.title && !paras && !s.image) return "";
+  const head = `${s.eyebrow?`<p class="eyebrow">${esc(s.eyebrow)}</p>`:""}<h2>${esc(s.title||"")}</h2>${paras}`;
+  if(s.image){
+    const pos = s.imagePos||"right";
+    if(pos==="top")
+      return `<section><div class="wrap"><img class="cs-top" src="${s.image}" alt="${esc(s.title||"")}">${head}</div></section>`;
+    return `<section><div class="wrap"><div class="cs-split ${pos==="left"?"left":"right"}">
+<div class="cs-media"><img src="${s.image}" alt="${esc(s.title||"")}"></div>
+<div class="cs-body">${head}</div></div></div></section>`;
+  }
+  return `<section><div class="wrap">${head}</div></section>`;
+}
+function buildSite(p){
+  const th = THEMES[p.theme] || THEMES.teal;
+  const phoneRaw = digits(p.phone);
+  const waNum = digits(p.whatsapp || p.phone);
+  const waMsg = encodeURIComponent("Hello, I'd like to book an appointment at "+p.clinic_name+".");
+  const waLink = waNum ? "https://wa.me/"+waNum+"?text="+waMsg : "#";
+  const mapSrc = p.address ? "https://www.google.com/maps?q="+encodeURIComponent(p.address)+"&output=embed" : "about:blank";
+
+  const headParam = th.head==="Fraunces" ? "Fraunces:opsz,wght@9..144,600" : th.head.replace(/ /g,"+")+":wght@600";
+  const bodyParam = th.body.replace(/ /g,"+")+":wght@400;700";
+  const fontHref = "https://fonts.googleapis.com/css2?family="+bodyParam+"&family="+headParam+"&display=swap";
+
+  const docCards = p.doctors.map(d=>`
+      <article class="doctor">
+        ${d.photo?`<img class="avatar" src="${d.photo}" alt="${esc(d.name)}">`:""}
+        <h3>${esc(d.name)}</h3>
+        <p class="quals">${esc(d.qualifications)}</p>
+        <p class="spec">${esc(d.specialization)}</p>
+        ${d.bio?`<p class="bio">${esc(d.bio)}</p>`:""}
+        ${d.registration_no?`<p class="reg">Reg. No: ${esc(d.registration_no)}</p>`:""}
+      </article>`).join("");
+
+  const serviceItems = p.services.map(s=>`<li>${esc(s)}</li>`).join("");
+  const timingRows = p.timings.map(t=>`<tr><th scope="row">${esc(t.days)}</th><td>${esc(t.hours)}</td></tr>`).join("");
+  let langPills = p.languages.map(l=>`<span class="meta-pill">${esc(l)}</span>`).join("");
+  if(langPills) langPills='<span class="meta-pill">Languages:</span>'+langPills;
+  const emailLine = p.email?`<p><strong>Email</strong><br><a href="mailto:${esc(p.email)}">${esc(p.email)}</a></p>`:"";
+  const feesBlock = p.fees?`<p style="margin-top:18px;color:var(--muted)"><strong>Consultation fee:</strong> ${esc(p.fees)}</p>`:"";
+  const regs = p.doctors.filter(d=>d.registration_no).map(d=>`${esc(d.name)} — Reg. No: ${esc(d.registration_no)}`).join(" &middot; ");
+
+  const logoHtml = p.logo?`<img class="logo" src="${p.logo}" alt="${esc(p.clinic_name)} logo">`:"";
+
+  const heroInner = `${logoHtml}<h1>${esc(p.clinic_name)}</h1>
+<p class="tagline">${esc(p.tagline)}</p>
+<div class="cta-row"><a class="btn btn-primary" href="${waLink}">Book on WhatsApp</a>
+<a class="btn btn-ghost" href="tel:${phoneRaw}">Call ${esc(p.phone)}</a></div>`;
+  let heroHtml;
+  if(p.heroStyle==="photo" && p.heroImage){
+    heroHtml=`<header class="hero-photo" style="background-image:linear-gradient(160deg,rgba(10,28,25,.66),rgba(10,28,25,.40)),url('${p.heroImage}')"><div class="wrap">${heroInner}</div></header>`;
+  }else if(p.heroStyle==="side" && p.heroImage){
+    heroHtml=`<header class="hero-split"><div class="wrap"><div class="hero-text">${heroInner}</div><div class="hero-img"><img src="${p.heroImage}" alt="${esc(p.clinic_name)}"></div></div></header>`;
+  }else{
+    heroHtml=`<header><div class="wrap">${heroInner}</div></header>`;
+  }
+
+  const sections = {
+    about:`<section><div class="wrap"><p class="eyebrow">About the clinic</p><h2>Care you can rely on</h2>
+<p class="lede">${esc(p.about)}</p><div>${langPills}</div></div></section>`,
+    doctors:`<section><div class="wrap"><p class="eyebrow">Our doctors</p><h2>Who you'll see</h2>
+<div class="doctors">${docCards}</div></div></section>`,
+    gallery:(p.facilities&&p.facilities.length)?`<section><div class="wrap"><p class="eyebrow">Our clinic</p><h2>Inside the clinic</h2>
+<div class="gallery">${p.facilities.map(f=>`<figure><img loading="lazy" src="${f.src}" alt="${esc(f.caption||p.clinic_name)}">${f.caption?`<figcaption>${esc(f.caption)}</figcaption>`:""}</figure>`).join("")}</div>
+</div></section>`:"",
+    services:`<section><div class="wrap"><p class="eyebrow">Services</p><h2>What we offer</h2>
+<ul class="services">${serviceItems}</ul></div></section>`,
+    timings:`<section><div class="wrap"><p class="eyebrow">OPD timings</p><h2>When we're open</h2>
+<table class="timings"><tbody>${timingRows}</tbody></table>${feesBlock}</div></section>`,
+    contact:`<section><div class="wrap"><p class="eyebrow">Visit us</p><h2>Find &amp; reach the clinic</h2>
+<div class="contact-grid"><div class="info">
+<p><strong>Address</strong><br>${esc(p.address)}</p>
+<p><strong>Phone</strong><br><a href="tel:${phoneRaw}">${esc(p.phone)}</a></p>
+${emailLine}
+<p><a class="btn btn-primary" href="${waLink}">Message on WhatsApp</a></p></div>
+<iframe loading="lazy" title="Clinic location map" src="${mapSrc}"></iframe></div></div></section>`
+  };
+  const order = (p.sectionOrder&&p.sectionOrder.length)?p.sectionOrder
+    :["about","doctors","gallery","services","timings","contact"].map(k=>({key:k,kind:"builtin",enabled:true}));
+  const body = order.map(s=>{
+    if(s.enabled===false) return "";
+    if(s.kind==="custom") return customSectionHtml(s);
+    return sections[s.key]||"";
+  }).join("\n");
+
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(p.clinic_name)}</title>
+<meta name="description" content="${esc(p.tagline||p.clinic_name)}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="${fontHref}" rel="stylesheet">
+<style>
+:root{--paper:${th.paper};--ink:${th.ink};--brand:${th.brand};--brand-dark:${th.brandDark};--accent:${th.accent};--muted:${th.muted};--line:${th.line};--card:${th.card}}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:${th.bodyStack};line-height:1.65;font-size:17px}
+h1,h2,h3{font-family:${th.headStack};font-weight:600;line-height:1.15;letter-spacing:-.01em}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+a{color:var(--brand);text-decoration:none}
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+header{background:linear-gradient(160deg,var(--brand) 0%,var(--brand-dark) 100%);color:#f3efe7;padding:62px 0 68px}
+header h1{font-size:clamp(2.1rem,6vw,3.4rem);color:#fff;max-width:14ch}
+header .logo{max-height:64px;max-width:200px;margin-bottom:18px;display:block}
+header .tagline{margin-top:16px;font-size:1.15rem;max-width:46ch;color:#e8efed}
+header.hero-photo{background-size:cover;background-position:center}
+header.hero-split .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
+header.hero-split .hero-img{border-radius:18px;overflow:hidden;max-height:360px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+header.hero-split .hero-img img{width:100%;height:100%;max-height:360px;object-fit:cover;display:block}
+@media(max-width:720px){header.hero-split .wrap{grid-template-columns:1fr}}
+.cta-row{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:700;font-size:.98rem}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4)}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:8px}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:24px}
+.doctors{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.doctor{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.doctor .avatar{width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid var(--line);margin-bottom:14px}
+.gallery{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.gallery figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.gallery img{width:100%;height:170px;object-fit:cover;display:block}
+.gallery figcaption{padding:9px 12px;font-size:.85rem;color:var(--muted)}
+.cs-split{display:grid;gap:30px;align-items:center;grid-template-columns:1fr 1fr}
+.cs-split.right .cs-media{order:2}
+.cs-media img{width:100%;border-radius:16px;display:block;border:1px solid var(--line)}
+.cs-body .lede{margin-bottom:14px}
+.cs-top{width:100%;max-height:360px;object-fit:cover;border-radius:16px;margin-bottom:22px;border:1px solid var(--line)}
+@media(max-width:720px){.cs-split{grid-template-columns:1fr}.cs-split.right .cs-media{order:0}}
+.doctor h3{font-size:1.3rem;margin-bottom:4px}.doctor .quals{font-weight:700;color:var(--brand)}
+.doctor .spec{color:var(--muted);margin-bottom:10px}.doctor .bio{font-size:.96rem;margin-bottom:10px}
+.doctor .reg{font-size:.82rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:6px}
+ul.services{list-style:none;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+ul.services li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px 14px 38px;position:relative}
+ul.services li::before{content:"";position:absolute;left:16px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--accent)}
+table.timings{width:100%;max-width:480px;border-collapse:collapse}
+table.timings th,table.timings td{text-align:left;padding:11px 4px;border-bottom:1px solid var(--line)}
+table.timings th{font-family:${th.bodyStack};font-weight:700;color:var(--brand)}
+.contact-grid{display:grid;gap:30px;grid-template-columns:1fr 1fr;align-items:start}
+.contact-grid .info p{margin-bottom:10px}
+.contact-grid iframe{width:100%;height:300px;border:0;border-radius:14px;border:1px solid var(--line)}
+.meta-pill{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.85rem;margin:4px 6px 4px 0}
+footer{background:var(--ink);color:#cdd6d3;padding:38px 0;font-size:.88rem}
+footer a{color:#9fd3c9}
+.disclaimer{margin-top:14px;color:#8d9a96;font-size:.8rem;max-width:70ch}
+.wa-float{position:fixed;right:18px;bottom:18px;background:#25d366;color:#fff;border-radius:999px;padding:14px 20px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.22);z-index:50}
+@media(max-width:720px){.contact-grid{grid-template-columns:1fr}section{padding:42px 0}}
+</style></head><body>
+${heroHtml}
+${body}
+<footer><div class="wrap"><p><strong>${esc(p.clinic_name)}</strong> &middot; ${esc(p.address)}</p>
+<p>${regs}</p>
+<p class="disclaimer">The information on this website is for general informational purposes only and does not constitute medical advice. Please consult a qualified doctor for diagnosis and treatment. This site does not solicit patients; it provides factual information about the clinic and its practitioners.</p>
+</div></footer>
+<a class="wa-float" href="${waLink}">WhatsApp us</a>
+</body></html>`;
+}
+
+/* ---------- dynamic list rendering ---------- */
+function renderDoctors(){
+  const c=document.getElementById("doctors");
+  c.innerHTML=doctors.map((d,i)=>`
+    <div class="item">
+      ${doctors.length>1?`<button class="btn-remove" onclick="removeDoctor(${i})">remove</button>`:""}
+      <label>Name</label><input value="${esc(d.name)}" oninput="doctors[${i}].name=this.value;update()" placeholder="Dr. Anjali Rao">
+      <div class="row">
+        <div><label>Qualifications</label><input value="${esc(d.qualifications)}" oninput="doctors[${i}].qualifications=this.value;update()" placeholder="MBBS, MD (Medicine)"></div>
+        <div><label>Specialization</label><input value="${esc(d.specialization)}" oninput="doctors[${i}].specialization=this.value;update()" placeholder="General Physician"></div>
+      </div>
+      <label>Registration number</label><input value="${esc(d.registration_no)}" oninput="doctors[${i}].registration_no=this.value;update()" placeholder="TSMC/FMR/12345">
+      <label>One-line bio (factual)</label><input value="${esc(d.bio)}" oninput="doctors[${i}].bio=this.value;update()" placeholder="Family medicine, focus on diabetes & BP care.">
+      <label>Photo</label>
+      <div class="uprow">
+        <input type="file" accept="image/*" onchange="setDoctorPhoto(${i}, this.files[0])">
+        ${d.photo?`<img class="thumb" src="${d.photo}">`:""}
+      </div>
+    </div>`).join("");
+}
+function addDoctor(){doctors.push({name:"",qualifications:"",specialization:"",registration_no:"",bio:"",photo:""});renderDoctors();update();}
+function removeDoctor(i){doctors.splice(i,1);renderDoctors();update();}
+
+function renderServices(){
+  document.getElementById("services").innerHTML=services.map((s,i)=>`
+    <div class="row" style="margin-top:8px">
+      <input value="${esc(s)}" oninput="services[${i}]=this.value;update()" placeholder="e.g. Diabetes management">
+      <button class="btn-remove" style="position:static;flex:0" onclick="removeService(${i})">✕</button>
+    </div>`).join("");
+}
+function addService(){services.push("");renderServices();update();}
+function removeService(i){services.splice(i,1);renderServices();update();}
+
+function renderTimings(){
+  document.getElementById("timings").innerHTML=timings.map((t,i)=>`
+    <div class="item">
+      ${timings.length>1?`<button class="btn-remove" onclick="removeTiming(${i})">remove</button>`:""}
+      <div class="row">
+        <div><label>Days</label><input value="${esc(t.days)}" oninput="timings[${i}].days=this.value;update()" placeholder="Mon – Sat"></div>
+        <div><label>Hours</label><input value="${esc(t.hours)}" oninput="timings[${i}].hours=this.value;update()" placeholder="10 AM – 1 PM, 6 – 9 PM"></div>
+      </div>
+    </div>`).join("");
+}
+function addTiming(){timings.push({days:"",hours:""});renderTimings();update();}
+function removeTiming(i){timings.splice(i,1);renderTimings();update();}
+
+function renderLanguages(){
+  document.getElementById("languages").innerHTML=languages.map((l,i)=>`
+    <div class="row" style="margin-top:8px">
+      <input value="${esc(l)}" oninput="languages[${i}]=this.value;update()" placeholder="e.g. Telugu">
+      <button class="btn-remove" style="position:static;flex:0" onclick="removeLanguage(${i})">✕</button>
+    </div>`).join("");
+}
+function addLanguage(){languages.push("");renderLanguages();update();}
+function removeLanguage(i){languages.splice(i,1);renderLanguages();update();}
+
+function renderFacilities(){
+  document.getElementById("facilities").innerHTML=facilities.map((f,i)=>`
+    <div class="fac-item">
+      <img src="${f.src}">
+      <input value="${esc(f.caption)}" oninput="facilities[${i}].caption=this.value;update()" placeholder="Caption (e.g. Consultation room)">
+      <button class="btn-remove" style="position:static" onclick="removeFacility(${i})">✕</button>
+    </div>`).join("");
+}
+
+/* ---------- update preview + warnings ---------- */
+function update(){
+  const p=collectProfile();
+  document.getElementById("preview").srcdoc=buildSite(p);
+
+  const customText=layout.filter(s=>s.kind==="custom").map(s=>(s.title||"")+" "+(s.body||""));
+  const blobs=[p.tagline,p.about].concat(p.doctors.map(d=>d.bio)).concat(p.services).concat(customText);
+  const issues=checkCompliance(blobs.join("\n"));
+  if(!p.doctors[0]||!p.doctors[0].registration_no)
+    issues.push("Add a medical registration number for the primary doctor before publishing — it's expected on a practitioner's public page in India.");
+  const w=document.getElementById("warnings");
+  if(issues.length===0){w.className="warnings ok";w.textContent="Compliance check: no issues detected.";}
+  else{w.className="warnings";w.innerHTML="<strong>Review before publishing:</strong><ul>"+issues.map(i=>"<li>"+esc(i)+"</li>").join("")+"</ul>";}
+}
+
+function downloadSite(){
+  const html=buildSite(collectProfile());
+  const blob=new Blob([html],{type:"text/html"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="index.html";
+  document.body.appendChild(a);a.click();a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ---------- save / load draft (per-clinic record for editing later) ---------- */
+function slug(s){return (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"clinic-draft";}
+function saveDraft(){
+  const draft={
+    _format:"clinic-builder-draft", _version:1,
+    fields:{
+      clinic_name:val("clinic_name"), tagline:val("tagline"), about:val("about"),
+      theme:val("theme"), hero_style:val("hero_style"), address:val("address"),
+      phone:val("phone"), whatsapp:val("whatsapp"), email:val("email"), fees:val("fees")
+    },
+    logo, heroImage, doctors, services, timings, languages, facilities, layout, customSeq
+  };
+  const blob=new Blob([JSON.stringify(draft)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=slug(val("clinic_name"))+".json";
+  document.body.appendChild(a);a.click();a.remove();
+  URL.revokeObjectURL(a.href);
+}
+function loadDraft(file){
+  if(!file) return;
+  const fileInput=document.getElementById("draft_file");
+  if(document.getElementById("clinic_name").value.trim() &&
+     !confirm("Load this draft? It will replace what's currently in the form.")){
+    fileInput.value=""; return;
+  }
+  const reader=new FileReader();
+  reader.onload=e=>{
+    let d;
+    try{ d=JSON.parse(e.target.result); }
+    catch(err){ alert("Could not read that file — it may be corrupted."); fileInput.value=""; return; }
+    if(!d || d._format!=="clinic-builder-draft"){
+      alert("This doesn't look like a clinic builder draft file."); fileInput.value=""; return;
+    }
+    const f=d.fields||{};
+    const setv=(id,v)=>{const el=document.getElementById(id); if(el) el.value=(v==null?"":v);};
+    setv("clinic_name",f.clinic_name); setv("tagline",f.tagline); setv("about",f.about);
+    setv("theme",f.theme||"teal"); setv("hero_style",f.hero_style||"gradient");
+    setv("address",f.address); setv("phone",f.phone); setv("whatsapp",f.whatsapp);
+    setv("email",f.email); setv("fees",f.fees);
+    logo=d.logo||""; heroImage=d.heroImage||"";
+    doctors=(Array.isArray(d.doctors)&&d.doctors.length)?d.doctors:[{name:"",qualifications:"",specialization:"",registration_no:"",bio:"",photo:""}];
+    services=Array.isArray(d.services)?d.services:[];
+    timings=Array.isArray(d.timings)?d.timings:[];
+    languages=Array.isArray(d.languages)?d.languages:[];
+    facilities=Array.isArray(d.facilities)?d.facilities:[];
+    layout=(Array.isArray(d.layout)&&d.layout.length)?d.layout:[
+      {key:"about",kind:"builtin",enabled:true},{key:"doctors",kind:"builtin",enabled:true},
+      {key:"gallery",kind:"builtin",enabled:true},{key:"services",kind:"builtin",enabled:true},
+      {key:"timings",kind:"builtin",enabled:true},{key:"contact",kind:"builtin",enabled:true}];
+    let maxSeq=0; layout.forEach(s=>{ if(s.kind==="custom"){ const n=parseInt(String(s.key).replace(/\D/g,""),10); if(n>maxSeq) maxSeq=n; }});
+    customSeq=Math.max(d.customSeq||0, maxSeq);
+    document.getElementById("logo_thumb").innerHTML = logo?`<img class="thumb logo" src="${logo}">`:"";
+    document.getElementById("hero_thumb").innerHTML = heroImage?`<img class="thumb" src="${heroImage}">`:"";
+    renderDoctors();renderServices();renderTimings();renderLanguages();renderFacilities();renderLayout();update();
+    fileInput.value="";
+  };
+  reader.readAsText(file);
+}
+
+/* ---------- init ---------- */
+renderDoctors();renderServices();renderTimings();renderLanguages();renderFacilities();renderLayout();update();
+</script>
+
+
+</body></html>
